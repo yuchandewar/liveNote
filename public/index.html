@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Hello bro
+
+    <div id="data">
+
+    </div>
+    <textarea id="msg" style="width: 100%; height: 50vh;" placeholder="Write a message..."></textarea>
+    <!-- <input  type="textarea"> -->
+
+
+
+    
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const actv = document.getElementById('msg');
+        const socket = io();
+        socket.on('connect', () => {
+            console.log('Connected to server');
+        });
+
+        actv.addEventListener('input', (e) => {
+            socket.emit('message', e.target.value);
+            // console.log(e.target.value);
+        })
+        
+        
+        
+
+        socket.on('message', (msg) => {
+            
+
+            actv.value = msg;
+            console.log(msg);
+        });
+    </script>
+
+</body>
+</html>
